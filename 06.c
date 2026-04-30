@@ -2,26 +2,24 @@
 
 #include <stdio.h>
 
-// Função que verifica divisibilidade
-int divisivel(int a, int b) {
-    // Processamento
-    if (b == 0) return 0;
-    return (a % b == 0);
+int divisivel(int a, int b){
+    if(a % b == 0){
+        return 1;
+    }else{
+        return 0;
+    }
 }
 
-int main() {
-    // Entrada
-    int num1, num2;
+int main(){
+    int a, b;
 
     printf("Digite dois numeros: ");
-    scanf("%d %d", &num1, &num2);
+    scanf("%d %d", &a, &b);
 
-    // Processamento
-    if (divisivel(num1, num2)) {
-        // Saída
-        printf("Eh divisivel\n");
-    } else {
-        printf("Nao eh divisivel\n");
+    if(divisivel(a, b)){
+        printf("Divisivel\n");
+    }else{
+        printf("Nao divisivel\n");
     }
 
     return 0;

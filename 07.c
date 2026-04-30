@@ -2,33 +2,21 @@
 
 #include <stdio.h>
 
-// Função de arredondamento
-int arredondar(float num) {
-    // Processamento
-    int inteiro = (int) num; // parte inteira
-    float decimal = num - inteiro;
-
-    if (decimal >= 0.5) {
-        return inteiro + 1; // arredonda pra cima
-    } else if (decimal <= -0.5) {
-        return inteiro - 1; // caso negativo
-    } else {
-        return inteiro; // mantém
+int arredonda(float n){
+    if(n - (int)n >= 0.5){
+        return (int)n + 1;
+    }else{
+        return (int)n;
     }
 }
 
-int main() {
-    // Entrada
-    float numero;
+int main(){
+    float n;
 
-    printf("Digite um numero real: ");
-    scanf("%f", &numero);
+    printf("Digite um numero: ");
+    scanf("%f", &n);
 
-    // Processamento
-    int resultado = arredondar(numero);
-
-    // Saída
-    printf("Numero arredondado: %d\n", resultado);
+    printf("Resultado: %d\n", arredonda(n));
 
     return 0;
 }
