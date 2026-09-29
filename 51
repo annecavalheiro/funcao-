@@ -1,0 +1,35 @@
+/*51. Um número é dito ser capicua quando lido da esquerda para a direita é o mesmo que quando lido da
+direita para a esquerda. O ano 2002, por exemplo, é capicua. Então, elabore uma função para verificar
+se um número possui essa característica. Caso o número seja capicua, a função deve retornar 1 e 0 em
+caso contrário. Escreva também um algoritmo para testar tal função.*/
+
+#include <stdio.h>
+
+// Função que verifica se é capicua
+int ehCapicua(int n) {
+    int original = n, inv = 0;
+
+    // Inverte o número
+    while (n > 0) {
+        inv = (inv * 10) + (n % 10);
+        n /= 10;
+    }
+
+    // Retorna 1 se for igual (verdadeiro) e 0 se diferente (falso)
+    return (original == inv);
+}
+
+int main() {
+    int n;
+
+    printf("Digite um numero: ");
+    scanf("%d", &n);
+
+    if (ehCapicua(n)) {
+        printf("Eh capicua!\n");
+    } else {
+        printf("Nao eh capicua.\n");
+    }
+
+    return 0;
+}
