@@ -1,0 +1,27 @@
+/*55. Criar uma função que calcule e retorne o MAIOR entre dois valores recebidos como parâmetro. Um
+algoritmo para testar tal função deve ser criado.*/
+
+#include <stdio.h>
+
+// Função que calcula e retorna o maior entre dois números
+int maior(int a, int b) {
+    if (a > b) {
+        return a;
+    } else {
+        return b;
+    }
+}
+
+// Algoritmo de teste (main)
+int main() {
+    int num1, num2;
+
+    printf("Digite dois numeros inteiros: ");
+    scanf("%d %d", &num1, &num2);
+
+    int resultado = maior(num1, num2);
+
+    printf("O maior numero eh: %d\n", resultado);
+
+    return 0;
+}
