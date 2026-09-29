@@ -1,0 +1,39 @@
+/*52. Criar uma função (não recursiva) que calcule e retorne o valor do fatorial de um número natural. A função
+deve retornar -1 caso não seja possível calcular o valor do fatorial. Escreva também um algoritmo para
+testar tal função.*/
+
+#include <stdio.h>
+
+// Função não recursiva que calcula o fatorial
+int fatorial(int n) {
+    // Fatorial só existe para números não negativos (n >= 0)
+    if (n < 0) {
+        return -1;
+    }
+
+    int fat = 1;
+    // Multiplica de 1 até n
+    for (int i = 1; i <= n; i++) {
+        fat *= i; // fat = fat * i
+    }
+
+    return fat;
+}
+
+// Algoritmo de teste (main)
+int main() {
+    int num;
+
+    printf("Digite um numero: ");
+    scanf("%d", &num);
+
+    int resultado = fatorial(num);
+
+    if (resultado == -1) {
+        printf("Nao eh possivel calcular o fatorial de numero negativo!\n");
+    } else {
+        printf("O fatorial de %d eh: %d\n", num, resultado);
+    }
+
+    return 0;
+}
