@@ -1,0 +1,52 @@
+/*53. Criar uma função que calcule e retorne o número de arranjos de n elementos p a p. A fórmula do arranjo
+é a seguinte:
+
+)!(
+!
+pn
+n An
+p − =
+
+Caso não seja capaz de calcular tal arranjo a função deve retornar -1. Um algoritmo para testar tal função
+também deve ser escrito.*/
+
+#include <stdio.h>
+
+// Função auxiliar: calcula o fatorial
+int fatorial(int n) {
+    if (n < 0) return -1;
+    int fat = 1;
+    for (int i = 1; i <= n; i++) {
+        fat *= i;
+    }
+    return fat;
+}
+
+// Função principal do exercício: calcula o Arranjo
+int arranjo(int n, int p) {
+    // Validações: n e p não podem ser negativos, e p não pode ser maior que n
+    if (n < 0 || p < 0 || p > n) {
+        return -1;
+    }
+
+    // Aplica a fórmula: n! / (n - p)!
+    return fatorial(n) / fatorial(n - p);
+}
+
+// Algoritmo de teste (main)
+int main() {
+    int n, p;
+
+    printf("Digite o valor de n e p: ");
+    scanf("%d %d", &n, &p);
+
+    int resultado = arranjo(n, p);
+
+    if (resultado == -1) {
+        printf("Nao foi possivel calcular o arranjo!\n");
+    } else {
+        printf("Arranjo A(%d, %d) = %d\n", n, p, resultado);
+    }
+
+    return 0;
+}
