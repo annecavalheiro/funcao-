@@ -1,0 +1,64 @@
+/* 76. Faça um procedimento que receba o vetor de registro definido no exercício anterior (28), por parâmetro,
+e retorna também por parâmetro: a maior idade entre os habitantes e a quantidade de individuos do sexo
+feminino cuja idade está entre 18 e 35 (inclusive) e que tenham olhos verdes e cabelos louros. */
+
+#include <stdio.h>
+
+#define TAM 50
+
+// Registro do Habitante
+typedef struct {
+    char sexo;           // 'M' ou 'F'
+    char olhos;          // 'A' (Azuis), 'V' (Verdes), 'C' (Castanhos)
+    char cabelos;        // 'L' (Louros), 'P' (Pretos), 'C' (Castanhos)
+    int idade;
+} Habitante;
+
+// Procedimento do exercício 76
+void analisarHabitantes(Habitante *vetor, int tamanho, int *maior_idade, int *qtd_especifica) {
+    *maior_idade = vetor[0].idade;
+    *qtd_especifica = 0;
+
+    for (int i = 0; i < tamanho; i++) {
+        // 1. Atualiza a maior idade encontrada
+        if (vetor[i].idade > *maior_idade) {
+            *maior_idade = vetor[i].idade;
+        }
+
+        // 2. Verifica as condições específicas para mulheres
+        if ((vetor[i].sexo == 'F' || vetor[i].sexo == 'f') &&
+            (vetor[i].idade >= 18 && vetor[i].idade <= 35) &&
+            (vetor[i].olhos == 'V' || vetor[i].olhos == 'v') &&
+            (vetor[i].cabelos == 'L' || vetor[i].cabelos == 'l')) {
+            (*qtd_especifica)++;
+        }
+    }
+}
+
+// Algoritmo de teste (main)
+int main() {
+    Habitante habitantes[TAM];
+    int maiorIdade, qtdMulheres;
+
+    // Leitura dos dados dos habitantes
+    for (int i = 0; i < TAM; i++) {
+        printf("\n--- Habitante %d ---\n", i + 1);
+        printf("Sexo (M/F): ");
+        scanf(" %c", &habitantes[i].sexo);
+        printf("Cor dos olhos (A - Azuis, V - Verdes, C - Castanhos): ");
+        scanf(" %c", &habitantes[i].olhos);
+        printf("Cor dos cabelos (L - Louros, P - Pretos, C - Castanhos): ");
+        scanf(" %c", &habitantes[i].cabelos);
+        printf("Idade: ");
+        scanf("%d", &habitantes[i].idade);
+    }
+
+    // Chama o procedimento passando as variáveis por referência (&)
+    analisarHabitantes(habitantes, TAM, &maiorIdade, &qtdMulheres);
+
+    printf("\n=== RESULTADOS DA PESQUISA ===\n");
+    printf("Maior idade entre os habitantes: %d anos\n", maiorIdade);
+    printf("Mulheres (18-35 anos, olhos verdes e cabelos louros): %d\n", qtdMulheres);
+
+    return 0;
+}
