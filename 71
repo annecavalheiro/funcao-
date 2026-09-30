@@ -1,0 +1,37 @@
+/* 71. O fatorial de um número n, inteiro e positivo, pode ser definido recursivamente, ou seja: */
+
+#include <stdio.h>
+
+// Função recursiva para calcular o fatorial
+long long fatorial(int n) {
+    // Retorna -1 caso o número seja negativo (inconsistência)
+    if (n < 0) {
+        return -1;
+    }
+
+    // Caso base: 0! = 1 e 1! = 1
+    if (n == 0 || n == 1) {
+        return 1;
+    }
+
+    // Passo recursivo: n! = n * (n - 1)!
+    return n * fatorial(n - 1);
+}
+
+// Algoritmo de teste (main)
+int main() {
+    int n;
+
+    printf("Digite um numero inteiro positivo: ");
+    scanf("%d", &n);
+
+    long long resultado = fatorial(n);
+
+    if (resultado == -1) {
+        printf("Erro: Nao eh possivel calcular o fatorial de numero negativo!\n");
+    } else {
+        printf("O fatorial de %d eh: %lld\n", n, resultado);
+    }
+
+    return 0;
+}
