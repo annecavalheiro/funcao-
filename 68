@@ -1,0 +1,50 @@
+/* 68. Pode-se calcular o quociente da divisão, DIV, de x por y, dois números inteiros, usando-se a seguinte
+definição: */
+
+#include <stdio.h>
+#include <stdlib.h> // Necessario para a funcao abs()
+
+// Função recursiva para calcular o quociente da divisão
+int divRecursiva(int x, int y) {
+    // Erro: Nao eh possivel dividir por zero
+    if (y == 0) {
+        return -1;
+    }
+
+    int absX = abs(x);
+    int absY = abs(y);
+
+    // Casos base e passo recursivo segundo a definicao
+    if (absX < absY) {
+        return 0;
+    } else if (absX == absY) {
+        return 1;
+    } else {
+        // Sinal da divisao: mantem a regra dos sinais do resultado final
+        int resultado = 1 + divRecursiva(absX - absY, absY);
+        
+        // Ajusta o sinal se apenas um dos numeros for negativo
+        if ((x < 0 && y > 0) || (x > 0 && y < 0)) {
+            return -resultado;
+        }
+        return resultado;
+    }
+}
+
+// Algoritmo de teste (main)
+int main() {
+    int x, y;
+
+    printf("Digite o dividendo (x) e o divisor (y): ");
+    scanf("%d %d", &x, &y);
+
+    int quociente = divRecursiva(x, y);
+
+    if (quociente == -1) {
+        printf("Erro: Divisao por zero nao eh permitida!\n");
+    } else {
+        printf("Quociente da divisao (%d / %d): %d\n", x, y, quociente);
+    }
+
+    return 0;
+}
