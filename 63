@@ -1,0 +1,25 @@
+/* 63. Crie uma função que realize a conversão de Fahrenheit (F) para graus Celsius (C), onde F é passado
+como parâmetro e C é retornado. Sabe-se que os pontos de fusão e ebulição nas escalas Celsius e
+Fahrenheit são: 0oC e 100oC, e 32oF e 212oF, respectivamente. Crie também um algoritmo para testar tal
+função.*/
+
+#include <stdio.h>
+
+// Função que converte Fahrenheit para Celsius
+float fahrenheitParaCelsius(float f) {
+    return (f - 32.0) * 5.0 / 9.0;
+}
+
+// Algoritmo de teste (main)
+int main() {
+    float fahrenheit;
+
+    printf("Digite a temperatura em Fahrenheit (F): ");
+    scanf("%f", &fahrenheit);
+
+    float celsius = fahrenheitParaCelsius(fahrenheit);
+
+    printf("%.2f oF equivalem a %.2f oC\n", fahrenheit, celsius);
+
+    return 0;
+}
