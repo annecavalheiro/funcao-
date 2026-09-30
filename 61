@@ -1,46 +1,55 @@
 /* 61. Construa uma função, que receba três coeficientes relativos à uma equação de segundo grau (ax2 + bx +
 c = 0) e calcule suas raízes através da fórmula de báscara: */
 
-#include <stdio.h>
-#include <math.h> // Necessario para usar a funcao sqrt()
 
-// Função que calcula as raízes usando Bhaskara
-int bhaskara(float a, float b, float c, float *x1, float *x2) {
-    // Nao eh equacao do 2º grau se 'a' for zero
+#include <stdio.h>
+#include <math.h> // Para usar a funcao sqrt()
+
+// Função que calcula as raízes e retorna a quantidade de raízes
+int raizes(float a, float b, float c, float *x1, float *x2) {
+    // Inconsistência: 'a' não pode ser 0 em equação do 2º grau
     if (a == 0) {
-        return -1; 
+        return -1;
     }
 
     float delta = (b * b) - (4 * a * c);
 
-    // Se delta for negativo, nao existem raizes reais
+    // Delta negativo: Nenhuma raiz real
     if (delta < 0) {
-        return -2; 
+        return 0;
     }
 
-    // Calculo das raizes
+    // Delta igual a zero: Uma única raiz real (duas raízes iguais)
+    if (delta == 0) {
+        *x1 = -b / (2 * a);
+        *x2 = *x1;
+        return 1;
+    }
+
+    // Delta positivo: Duas raízes reais e diferentes
     *x1 = (-b + sqrt(delta)) / (2 * a);
     *x2 = (-b - sqrt(delta)) / (2 * a);
-
-    return 0; // Sucesso
+    return 2;
 }
 
 // Algoritmo de teste (main)
 int main() {
-    float a, b, c, x1, x2;
+    float a, b, c;
+    float x1, x2;
 
     printf("Digite os coeficientes a, b e c: ");
     scanf("%f %f %f", &a, &b, &c);
 
-    int status = bhaskara(a, b, c, &x1, &x2);
+    int qtd = raizes(a, b, c, &x1, &x2);
 
-    if (status == -1) {
-        printf("Erro: O coeficiente 'a' nao pode ser zero (nao eh 2o grau).\n");
-    } else if (status == -2) {
-        printf("A equacao nao possui raizes reais (Delta negativo).\n");
-    } else {
-        printf("x1 = %.2f\n", x1);
-        printf("x2 = %.2f\n", x2);
+    if (qtd == -1) {
+        printf("Inconsistencia: Coeficiente 'a' nao pode ser zero.\n");
+    } else if (qtd == 0) {
+        printf("A equacao nao possui raizes reais.\n");
+    } else if (qtd == 1) {
+        printf("A equacao possui 1 raiz real: x = %.2f\n", x1);
+    } else if (qtd == 2) {
+        printf("A equacao possui 2 raizes reais: x1 = %.2f e x2 = %.2f\n", x1, x2);
     }
 
     return 0;
