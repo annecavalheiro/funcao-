@@ -1,0 +1,41 @@
+/*56. Criar uma função que verifique quantas vezes um número inteiro x é divisível por um número inteiro y. A
+função deve retornar -1 caso não seja possível calcular. Escreva também um algoritmo para testar tal
+função.*/
+
+#include <stdio.h>
+
+// Função que conta quantas vezes x é divisível por y
+int quantasVezesDivisivel(int x, int y) {
+    // Não é possível dividir por 0 ou por números <= 1 em divisões sucessivas
+    if (y <= 1 || x <= 0) {
+        return -1;
+    }
+
+    int contador = 0;
+
+    // Enquanto x for divisível de forma exata por y
+    while (x % y == 0) {
+        contador++; // Conta mais uma divisão
+        x = x / y;  // Atualiza x com o resultado da divisão
+    }
+
+    return contador;
+}
+
+// Algoritmo de teste (main)
+int main() {
+    int x, y;
+
+    printf("Digite o valor de x e y: ");
+    scanf("%d %d", &x, &y);
+
+    int resultado = quantasVezesDivisivel(x, y);
+
+    if (resultado == -1) {
+        printf("Nao foi possivel calcular!\n");
+    } else {
+        printf("O numero %d eh divisivel por %d exatamente %d vez(es).\n", x, y, resultado);
+    }
+
+    return 0;
+}
