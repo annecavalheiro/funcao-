@@ -1,0 +1,49 @@
+/* 75. Foi realizada uma pesquisa de algumas características físicas de 50 habitantes de uma certa região. De
+cada habitante foram coletados os seguintes dados: sexo, cor dos olhos (azuis, verdes ou castanhos),
+cor dos cabelos (louros, pretos ou castanhos) e idade. Faça um procedimento que leia esses dados em
+um vetor de registro. O vetor de registro deve ser enviado por referência.*/
+
+#include <stdio.h>
+
+#define TAM 50
+
+// Definição da estrutura (registro) do Habitante
+typedef struct {
+    char sexo;           // 'M' ou 'F'
+    char olhos;          // 'A' (Azuis), 'V' (Verdes), 'C' (Castanhos)
+    char cabelos;        // 'L' (Louros), 'P' (Pretos), 'C' (Castanhos)
+    int idade;
+} Habitante;
+
+// Procedimento que lê os dados de N habitantes no vetor (passado por referência/ponteiro)
+void lerHabitantes(Habitante *vetor, int tamanho) {
+    for (int i = 0; i < tamanho; i++) {
+        printf("\n--- Habitante %d ---\n", i + 1);
+        
+        printf("Sexo (M/F): ");
+        scanf(" %c", &vetor[i].sexo);
+        
+        printf("Cor dos olhos (A - Azuis, V - Verdes, C - Castanhos): ");
+        scanf(" %c", &vetor[i].olhos);
+        
+        printf("Cor dos cabelos (L - Louros, P - Pretos, C - Castanhos): ");
+        scanf(" %c", &vetor[i].cabelos);
+        
+        printf("Idade: ");
+        scanf("%d", &vetor[i].idade);
+    }
+}
+
+// Algoritmo de teste (main)
+int main() {
+    Habitante habitantes[TAM];
+
+    printf("=== CADASTRO DE HABITANTES ===\n");
+    
+    // Chama o procedimento passando o vetor por referência
+    lerHabitantes(habitantes, TAM);
+
+    printf("\nLeitura de dados concluida com sucesso!\n");
+
+    return 0;
+}
