@@ -1,0 +1,30 @@
+/* 62. Crie uma função que realize a conversão para Radianos (rad) a partir de Graus (grad), onde grad é
+passado como parâmetro e rad é retornado. Sabe-se que 180o (graus) está para π radianos. Crie também
+um algoritmo para testar tal função.*/
+
+#include <stdio.h>
+#include <math.h> // Para usar a constante M_PI ou float com calculos matematicos
+
+// Se M_PI nao for reconhecido em alguns compiladores antigos, definimos PI:
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
+// Função que converte graus para radianos
+float grausParaRadianos(float grad) {
+    return (grad * M_PI) / 180.0;
+}
+
+// Algoritmo de teste (main)
+int main() {
+    float graus;
+
+    printf("Digite o valor em graus (grad): ");
+    scanf("%f", &graus);
+
+    float radianos = grausParaRadianos(graus);
+
+    printf("%.2f graus equivalem a %.4f radianos.\n", graus, radianos);
+
+    return 0;
+}
