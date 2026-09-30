@@ -1,0 +1,41 @@
+/* 59. Construa uma função que receba dois valores inteiros a e b, retorne (passagem por referência) o
+quociente, div, e o resto divisão, mod, de a por b. A função deve retornar -1 caso não seja possível
+realizar as operações e 0 caso seja possível. Um algoritmo para utilizar tal função deve ser criado,
+tratando o retorno da função. */
+
+#include <stdio.h>
+
+// Função que calcula a divisão (quociente) e o resto (mod) por referência
+int divMod(int a, int b, int *div, int *mod) {
+    // Não é possível dividir por zero
+    if (b == 0) {
+        return -1; // Retorna -1 indicando erro
+    }
+
+    *div = a / b; // Quociente
+    *mod = a % b; // Resto
+
+    return 0; // Retorna 0 indicando sucesso
+}
+
+// Algoritmo de teste (main)
+int main() {
+    int a, b;
+    int quociente, resto;
+
+    printf("Digite dois valores inteiros (a e b): ");
+    scanf("%d %d", &a, &b);
+
+    // Passa o endereço de quociente e resto com &
+    int status = divMod(a, b, &quociente, &resto);
+
+    // Trata o retorno da função
+    if (status == -1) {
+        printf("Erro: Nao eh possivel realizar divisao por zero!\n");
+    } else {
+        printf("Quociente (div): %d\n", quociente);
+        printf("Resto (mod): %d\n", resto);
+    }
+
+    return 0;
+}
