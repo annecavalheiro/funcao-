@@ -1,0 +1,43 @@
+/* 80. Faça um procedimento que recebe 2 vetores A e B de tamanho 10 de inteiros, por parâmetro. Ao final do
+procedimento B deve conter o fatorial de cada elemento de A. O vetor B deve retornar alterado. */
+
+#include <stdio.h>
+
+// processamento
+long long calcularFatorial(int n) {
+    if (n <= 1) return 1;
+    long long fat = 1;
+    for (int i = 2; i <= n; i++) {
+        fat *= i;
+    }
+    return fat;
+}
+
+// processamento
+void calcularFatorialVetor(int A[10], long long B[10]) {
+    for (int i = 0; i < 10; i++) {
+        B[i] = calcularFatorial(A[i]);
+    }
+}
+
+int main() {
+    // entrada
+    int A[10];
+    long long B[10];
+
+    printf("Digite 10 numeros inteiros:\n");
+    for (int i = 0; i < 10; i++) {
+        scanf("%d", &A[i]);
+    }
+
+    // processamento
+    calcularFatorialVetor(A, B);
+
+    // saida
+    printf("\nResultado (Fatorial de cada elemento de A):\n");
+    for (int i = 0; i < 10; i++) {
+        printf("B[%d] = %lld\n", i, B[i]);
+    }
+
+    return 0;
+}
