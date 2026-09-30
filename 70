@@ -1,0 +1,37 @@
+/* 70. O máximo divisor comum (MDC) de dois números inteiros x e y pode ser calculado usando-se uma
+definição recursiva: */
+
+#include <stdio.h>
+
+// Função recursiva para calcular o MDC segundo as regras do enunciado
+int mdc(int x, int y) {
+    // Regra 1: MDC(x, x) = x (Caso base)
+    if (x == y) {
+        return x;
+    }
+    
+    // Regra 2: MDC(x, y) = MDC(x - y, y), se x > y
+    if (x > y) {
+        return mdc(x - y, y);
+    }
+    
+    // Regra 3: MDC(x, y) = MDC(y, x), se x < y
+    return mdc(y, x);
+}
+
+// Algoritmo de teste (main)
+int main() {
+    int x, y;
+
+    printf("Digite dois valores inteiros positivos (x e y): ");
+    scanf("%d %d", &x, &y);
+
+    if (x <= 0 || y <= 0) {
+        printf("Por favor, digite apenas numeros inteiros maiores que zero.\n");
+    } else {
+        int resultado = mdc(x, y);
+        printf("O MDC de %d e %d eh: %d\n", x, y, resultado);
+    }
+
+    return 0;
+}
