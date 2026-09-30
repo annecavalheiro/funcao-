@@ -1,0 +1,24 @@
+/* 64. Crie uma função que realize a conversão de Polegadas (pol) para Centímetros (cm), onde pol é passado
+como parâmetro e cm é retornado. Sabe-se que 1 polegada está para 2,54 centímetros. Crie também um
+algoritmo par a testar tal função. */ 
+
+#include <stdio.h>
+
+// Função que converte polegadas para centímetros
+float polegadasParaCentimetros(float pol) {
+    return pol * 2.54;
+}
+
+// Algoritmo de teste (main)
+int main() {
+    float polegadas;
+
+    printf("Digite o valor em polegadas (pol): ");
+    scanf("%f", &polegadas);
+
+    float centimetros = polegadasParaCentimetros(polegadas);
+
+    printf("%.2f polegadas equivalem a %.2f cm\n", polegadas, centimetros);
+
+    return 0;
+}
