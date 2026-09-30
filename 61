@@ -1,0 +1,47 @@
+/* 61. Construa uma função, que receba três coeficientes relativos à uma equação de segundo grau (ax2 + bx +
+c = 0) e calcule suas raízes através da fórmula de báscara: */
+
+#include <stdio.h>
+#include <math.h> // Necessario para usar a funcao sqrt()
+
+// Função que calcula as raízes usando Bhaskara
+int bhaskara(float a, float b, float c, float *x1, float *x2) {
+    // Nao eh equacao do 2º grau se 'a' for zero
+    if (a == 0) {
+        return -1; 
+    }
+
+    float delta = (b * b) - (4 * a * c);
+
+    // Se delta for negativo, nao existem raizes reais
+    if (delta < 0) {
+        return -2; 
+    }
+
+    // Calculo das raizes
+    *x1 = (-b + sqrt(delta)) / (2 * a);
+    *x2 = (-b - sqrt(delta)) / (2 * a);
+
+    return 0; // Sucesso
+}
+
+// Algoritmo de teste (main)
+int main() {
+    float a, b, c, x1, x2;
+
+    printf("Digite os coeficientes a, b e c: ");
+    scanf("%f %f %f", &a, &b, &c);
+
+    int status = bhaskara(a, b, c, &x1, &x2);
+
+    if (status == -1) {
+        printf("Erro: O coeficiente 'a' nao pode ser zero (nao eh 2o grau).\n");
+    } else if (status == -2) {
+        printf("A equacao nao possui raizes reais (Delta negativo).\n");
+    } else {
+        printf("x1 = %.2f\n", x1);
+        printf("x2 = %.2f\n", x2);
+    }
+
+    return 0;
+}
