@@ -1,0 +1,38 @@
+/* 66. Crie uma função que realize a conversão da escala Kelvin (K- escala absoluta) para a escala Fahrenheit
+(F). Sabe-se que 273K equivale a 32oF e a cada variação de 10 unidades na escala Kelvin equivale a 18
+na escala Fahrenheit. A função deve retornar zero caso não seja possível realizar a conversão e um em
+caso contrário. Crie também um algoritmo para testar tal função. */
+
+#include <stdio.h>
+
+// Função que converte Kelvin para Fahrenheit
+// Retorna 1 em caso de sucesso e 0 em caso de erro (K < 0)
+int kelvinParaFahrenheit(float k, float *f) {
+    // Zero absoluto: temperatura em Kelvin nao pode ser negativa
+    if (k < 0) {
+        return 0; // Erro
+    }
+
+    // Calculo baseado nas especificacoes do enunciado
+    *f = 32.0 + (k - 273.0) * 1.8;
+
+    return 1; // Sucesso
+}
+
+// Algoritmo de teste (main)
+int main() {
+    float kelvin, fahrenheit;
+
+    printf("Digite a temperatura em Kelvin (K): ");
+    scanf("%f", &kelvin);
+
+    int status = kelvinParaFahrenheit(kelvin, &fahrenheit);
+
+    if (status == 0) {
+        printf("Erro: Temperatura abaixo do Zero Absoluto (K < 0)!\n");
+    } else {
+        printf("%.2f K equivalem a %.2f oF\n", kelvin, fahrenheit);
+    }
+
+    return 0;
+}
