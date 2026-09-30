@@ -1,0 +1,43 @@
+/* 73. Faça um procedimento que recebe, por parâmetro, a hora de inicio e a hora de término de um jogo, ambas
+subdivididas em 2 valores distintos: horas e minutos. O procedimento deve retornar, também por
+parâmetro, a duração do jogo em horas e minutos, considerando que o tempo máximo de duração de um
+jogo é de 24 horas e que o jogo pode começar em um dia e terminar no outro. */
+
+#include <stdio.h>
+
+// Procedimento que calcula a duração do jogo
+void calcularDuracaoJogo(int h_inicio, int m_inicio, int h_fim, int m_fim, int *duracao_h, int *duracao_m) {
+    // Converte os dois horários para minutos desde o início do dia
+    int inicio_total_min = h_inicio * 60 + m_inicio;
+    int fim_total_min = h_fim * 60 + m_fim;
+
+    // Se o término for menor ou igual ao início, o jogo durou até o dia seguinte
+    if (fim_total_min <= inicio_total_min) {
+        fim_total_min += 24 * 60; // Soma 24 horas em minutos (1440)
+    }
+
+    int duracao_total_min = fim_total_min - inicio_total_min;
+
+    // Converte o total em minutos de volta para horas e minutos
+    *duracao_h = duracao_total_min / 60;
+    *duracao_m = duracao_total_min % 60;
+}
+
+// Algoritmo de teste (main)
+int main() {
+    int h1, m1, h2, m2;
+    int duracao_h, duracao_m;
+
+    printf("Digite o horario de inicio (horas e minutos): ");
+    scanf("%d %d", &h1, &m1);
+
+    printf("Digite o horario de termino (horas e minutos): ");
+    scanf("%d %d", &h2, &m2);
+
+    // Passa os ponteiros (&) para receber os resultados
+    calcularDuracaoJogo(h1, m1, h2, m2, &duracao_h, &duracao_m);
+
+    printf("A duracao do jogo foi de: %d hora(s) e %d minuto(s).\n", duracao_h, duracao_m);
+
+    return 0;
+}
