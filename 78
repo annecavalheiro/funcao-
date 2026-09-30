@@ -1,0 +1,77 @@
+/* 78. Faça um procedimento que receba o vetor de registro definido no exercício anterior (30), por parâmetro,
+e retorna também por parâmetro: a média de salário entre os habitantes, a menor e a maior idade do
+grupo e a quantidade de mulheres com 3 filhos que recebe até R$500,00. */
+
+#include <stdio.h>
+
+#define TAM 500
+
+// Registro do Habitante (definido no exercício anterior)
+typedef struct {
+    int idade;
+    char sexo;        // 'M' ou 'F'
+    float salario;
+    int num_filhos;
+} Habitante;
+
+// Procedimento que calcula as estatísticas e retorna os resultados por parâmetro
+void estatisticasHabitantes(Habitante *vetor, int tamanho, float *media_salario, int *menor_idade, int *maior_idade, int *qtd_mulheres_especifica) {
+    float soma_salario = 0.0;
+    *menor_idade = vetor[0].idade;
+    *maior_idade = vetor[0].idade;
+    *qtd_mulheres_especifica = 0;
+
+    for (int i = 0; i < tamanho; i++) {
+        // 1. Acumula salário para a média
+        soma_salario += vetor[i].salario;
+
+        // 2. Atualiza menor e maior idade
+        if (vetor[i].idade < *menor_idade) {
+            *menor_idade = vetor[i].idade;
+        }
+        if (vetor[i].idade > *maior_idade) {
+            *maior_idade = vetor[i].idade;
+        }
+
+        // 3. Contabiliza mulheres com 3 filhos e salário de até R$ 500,00
+        if ((vetor[i].sexo == 'F' || vetor[i].sexo == 'f') &&
+            vetor[i].num_filhos == 3 &&
+            vetor[i].salario <= 500.0) {
+            (*qtd_mulheres_especifica)++;
+        }
+    }
+
+    // Calcula a média salarial do grupo
+    *media_salario = soma_salario / tamanho;
+}
+
+// Algoritmo de teste (main)
+int main() {
+    Habitante habitantes[TAM];
+    float mediaSalario;
+    int menorIdade, maiorIdade, qtdMulheres;
+
+    // Leitura dos dados dos habitantes
+    for (int i = 0; i < TAM; i++) {
+        printf("\n--- Habitante %d ---\n", i + 1);
+        printf("Idade: ");
+        scanf("%d", &habitantes[i].idade);
+        printf("Sexo (M/F): ");
+        scanf(" %c", &habitantes[i].sexo);
+        printf("Salario: R$ ");
+        scanf("%f", &habitantes[i].salario);
+        printf("Numero de filhos: ");
+        scanf("%d", &habitantes[i].num_filhos);
+    }
+
+    // Chamada do procedimento passando os resultados por referência (&)
+    estatisticasHabitantes(habitantes, TAM, &mediaSalario, &menorIdade, &maiorIdade, &qtdMulheres);
+
+    printf("\n=== RESULTADOS ESTATISTICOS ===\n");
+    printf("Media salarial do grupo: R$ %.2f\n", mediaSalario);
+    printf("Menor idade: %d anos\n", menorIdade);
+    printf("Maior idade: %d anos\n", maiorIdade);
+    printf("Mulheres com 3 filhos e salario ate R$ 500,00: %d\n", qtdMulheres);
+
+    return 0;
+}
