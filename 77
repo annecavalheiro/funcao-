@@ -1,0 +1,48 @@
+/* 77. Foi realizada uma pesquisa entre 500 habitantes de uma certa região. De cada habitante foram coletados
+os dados: idade, sexo, salário e número de filhos. Faça um procedimento que leia esses dados em um
+vetor de registro. O vetor de registro deve ser enviado por referência. */ 
+
+#include <stdio.h>
+
+#define TAM 500
+
+// Definição da estrutura (registro) do Habitante
+typedef struct {
+    int idade;
+    char sexo;        // 'M' ou 'F'
+    float salario;
+    int num_filhos;
+} Habitante;
+
+// Procedimento que lê os dados dos habitantes e os armazena no vetor (enviado por referência)
+void lerHabitantes(Habitante *vetor, int tamanho) {
+    for (int i = 0; i < tamanho; i++) {
+        printf("\n--- Habitante %d ---\n", i + 1);
+
+        printf("Idade: ");
+        scanf("%d", &vetor[i].idade);
+
+        printf("Sexo (M/F): ");
+        scanf(" %c", &vetor[i].sexo);
+
+        printf("Salario: R$ ");
+        scanf("%f", &vetor[i].salario);
+
+        printf("Numero de filhos: ");
+        scanf("%d", &vetor[i].num_filhos);
+    }
+}
+
+// Algoritmo de teste (main)
+int main() {
+    Habitante habitantes[TAM];
+
+    printf("=== CADASTRO DA PESQUISA DE HABITANTES ===\n");
+
+    // Chama o procedimento enviando o vetor por referência
+    lerHabitantes(habitantes, TAM);
+
+    printf("\nLeitura dos %d habitantes concluida com sucesso!\n", TAM);
+
+    return 0;
+}
