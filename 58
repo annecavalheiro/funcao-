@@ -1,0 +1,36 @@
+/* 58. Construa uma função que receba três valores, a, b e c, retorne (passagem por referência) o MAIOR e o
+MENOR valor desses três. Deve ser criado um algoritmo para utilizar tal função lendo os três valores e
+imprimindo o maior e o menor valor computado. */
+#include <stdio.h>
+
+// Função que calcula o maior e o menor por referência
+void encontraMaiorMenor(int a, int b, int c, int *maior, int *menor) {
+    // Assume inicialmente que 'a' é tanto o maior quanto o menor
+    *maior = a;
+    *menor = a;
+
+    // Testa se 'b' é maior ou menor
+    if (b > *maior) *maior = b;
+    if (b < *menor) *menor = b;
+
+    // Testa se 'c' é maior ou menor
+    if (c > *maior) *maior = c;
+    if (c < *menor) *menor = c;
+}
+
+// Algoritmo de teste (main)
+int main() {
+    int a, b, c;
+    int maior, menor;
+
+    printf("Digite tres valores inteiros: ");
+    scanf("%d %d %d", &a, &b, &c);
+
+    // Passamos o endereço de 'maior' e 'menor' com &
+    encontraMaiorMenor(a, b, c, &maior, &menor);
+
+    printf("Maior valor: %d\n", maior);
+    printf("Menor valor: %d\n", menor);
+
+    return 0;
+}
