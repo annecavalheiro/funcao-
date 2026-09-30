@@ -1,0 +1,24 @@
+/* 65. Crie uma função que realize a conversão de pés (feet) para metros (m), onde feet é passado como
+parâmetro e m é retornado. Sabe-se que 1 metro está para 3,281 pés. Crie também um algoritmo para
+testar tal função. */
+
+#include <stdio.h>
+
+// Função que converte pés para metros
+float pesParaMetros(float feet) {
+    return feet / 3.281;
+}
+
+// Algoritmo de teste (main)
+int main() {
+    float pes;
+
+    printf("Digite o valor em pes (feet): ");
+    scanf("%f", &pes);
+
+    float metros = pesParaMetros(pes);
+
+    printf("%.2f pes equivalem a %.2f metros\n", pes, metros);
+
+    return 0;
+}
