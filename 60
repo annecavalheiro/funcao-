@@ -1,0 +1,43 @@
+/* 60. Construa uma função que receba cinco valores e determine (retorne por passagem por referência) o 2o e
+o 4o maior valores dentre eles. Construa também um algoritmo para ler tais valores, e imprimir o resultado
+obtido com a chamada da função. */
+
+#include <stdio.h>
+
+// Função que encontra o 2º e 4º maior por referência
+void segundoEQuartoMaior(int v1, int v2, int v3, int v4, int v5, int *segundoMaior, int *quartoMaior) {
+    int v[5] = {v1, v2, v3, v4, v5};
+    int temp;
+
+    // Algoritmo simples de ordenação (Bubble Sort) para colocar em ordem crescente
+    for (int i = 0; i < 5; i++) {
+        for (int j = i + 1; j < 5; j++) {
+            if (v[i] > v[j]) {
+                temp = v[i];
+                v[i] = v[j];
+                v[j] = temp;
+            }
+        }
+    }
+
+    // Após ordenar: v[0] é o menor, v[4] é o maior
+    *quartoMaior = v[1];   // 2º menor (4º maior)
+    *segundoMaior = v[3];  // 2º maior
+}
+
+// Algoritmo de teste (main)
+int main() {
+    int a, b, c, d, e;
+    int segundo, quarto;
+
+    printf("Digite 5 valores inteiros: ");
+    scanf("%d %d %d %d %d", &a, &b, &c, &d, &e);
+
+    // Chama a função passando os endereços com &
+    segundoEQuartoMaior(a, b, c, d, e, &segundo, &quarto);
+
+    printf("O 2o maior valor eh: %d\n", segundo);
+    printf("O 4o maior valor eh: %d\n", quarto);
+
+    return 0;
+}
