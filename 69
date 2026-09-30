@@ -1,0 +1,43 @@
+/* 69. Pode-se calcular o resto da divisão, MOD, de x por y, dois números inteiros, usando-se a seguinte
+definição: */
+
+#include <stdio.h>
+#include <stdlib.h> // Necessario para a funcao abs()
+
+// Função recursiva para calcular o resto da divisão (MOD)
+int modRecursivo(int x, int y) {
+    // Erro: Divisão por zero não é permitida
+    if (y == 0) {
+        return -1;
+    }
+
+    int absX = abs(x);
+    int absY = abs(y);
+
+    // Casos base e passo recursivo segundo o enunciado
+    if (absX < absY) {
+        return absX;
+    } else if (absX == absY) {
+        return 0;
+    } else {
+        return modRecursivo(absX - absY, absY);
+    }
+}
+
+// Algoritmo de teste (main)
+int main() {
+    int x, y;
+
+    printf("Digite o dividendo (x) e o divisor (y): ");
+    scanf("%d %d", &x, &y);
+
+    int resto = modRecursivo(x, y);
+
+    if (resto == -1) {
+        printf("Erro: Divisao por zero nao eh permitida!\n");
+    } else {
+        printf("Resto da divisao (MOD) de %d por %d: %d\n", x, y, resto);
+    }
+
+    return 0;
+}
