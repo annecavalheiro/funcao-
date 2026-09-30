@@ -1,0 +1,41 @@
+//74. Faça uma função que recebe, por parâmetro, um valor inteiro e positivo e retorna o número de divisores
+desse valor.
+
+#include <stdio.h>
+
+// Função que recebe um inteiro positivo e retorna o número de divisores
+int contarDivisores(int n) {
+    // Retorna 0 para valores não positivos
+    if (n <= 0) {
+        return 0;
+    }
+
+    int divisores = 0;
+
+    // Percorre de 1 até n para contar os divisores exatos
+    for (int i = 1; i <= n; i++) {
+        if (n % i == 0) {
+            divisores++;
+        }
+    }
+
+    return divisores;
+}
+
+// Algoritmo de teste (main)
+int main() {
+    int numero;
+
+    printf("Digite um numero inteiro positivo: ");
+    scanf("%d", &numero);
+
+    int qtd = contarDivisores(numero);
+
+    if (qtd == 0) {
+        printf("Por favor, digite um numero maior que zero.\n");
+    } else {
+        printf("O numero %d possui %d divisor(es).\n", numero, qtd);
+    }
+
+    return 0;
+}
