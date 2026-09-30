@@ -1,0 +1,44 @@
+//79. Faça um procedimento que retorna, por parâmetro, um vetor A(5) com os 5 primeiros números perfeitos. 
+#include <stdio.h>
+#include <stdbool.h>
+
+// processamento
+bool ehPerfeito(long long n) {
+    if (n <= 1) return false;
+    long long soma = 1;
+    for (long long i = 2; i * i <= n; i++) {
+        if (n % i == 0) {
+            soma += i;
+            if (i * i != n) soma += n / i;
+        }
+    }
+    return soma == n;
+}
+
+// processamento
+void obterPrimeirosPerfeitos(long long A[5]) {
+    int encontrados = 0;
+    long long numero = 2;
+    while (encontrados < 5) {
+        if (ehPerfeito(numero)) {
+            A[encontrados] = numero;
+            encontrados++;
+        }
+        numero++;
+    }
+}
+
+int main() {
+    // entrada
+    long long A[5];
+
+    // processamento
+    obterPrimeirosPerfeitos(A);
+
+    // saida
+    for (int i = 0; i < 5; i++) {
+        printf("A[%d] = %lld\n", i, A[i]);
+    }
+
+    return 0;
+}
