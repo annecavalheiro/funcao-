@@ -1,0 +1,31 @@
+/* 67. Seja a série de Fibonacci:
+1, 1, 2, 3, 5, 8, 13, 21, 34, 55, ...
+que pode ser definida recursivamente por: */
+
+#include <stdio.h>
+
+// Função recursiva para calcular o termo n da sequência de Fibonacci
+int fibonacci(int n) {
+    // Casos base: se n for 1 ou 2, o termo é 1 (ou n <= 2)
+    if (n <= 2) {
+        return 1;
+    }
+    
+    // Passo recursivo: Fib(n) = Fib(n-1) + Fib(n-2)
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// Algoritmo de teste (main)
+int main() {
+    int limite = 20;
+
+    printf("Serie de Fibonacci ate o %do termo:\n", limite);
+
+    // Loop para imprimir do 1º ao 20º termo
+    for (int i = 1; i <= limite; i++) {
+        printf("%d ", fibonacci(i));
+    }
+    printf("\n");
+
+    return 0;
+}
