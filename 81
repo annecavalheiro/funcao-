@@ -1,0 +1,39 @@
+/*80. Faça um procedimento que recebe 2 vetores A e B de tamanho 10 de inteiros, por parâmetro. Ao final do
+procedimento B deve conter o fatorial de cada elemento de A. O vetor B deve retornar alterado. */
+
+#include <stdio.h>
+
+// Função modularizada que calcula o fatorial de um numero
+int calcularFatorial(int n) {
+    int fat = 1;
+    for (int i = 1; i <= n; i++) {
+        fat = fat * i;
+    }
+    return fat;
+}
+
+// Procedimento que recebe os vetores e altera o vetor B
+void preencherFatorial(int A[], int B[]) {
+    // Processamento: passa por cada elemento de A e guarda o fatorial em B
+    for (int i = 0; i < 10; i++) {
+        B[i] = calcularFatorial(A[i]);
+    }
+}
+
+int main() {
+    // Entrada: vetor A preenchido e vetor B vazio
+    int A[10] = {4, 1, 0, 3, 5, 2, 6, 0, 4, 3};
+    int B[10];
+
+    // Chama o procedimento para calcular e alterar o vetor B
+    preencherFatorial(A, B);
+
+    // Saida: mostra o vetor B alterado
+    printf("Vetor B (fatoriais de A):\n");
+    for (int i = 0; i < 10; i++) {
+        printf("%d ", B[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
