@@ -1,0 +1,50 @@
+/* 111. Faça um procedimento que receba, por parâmetro, uma matriz A(6,6) e multiplica cada linha pelo
+elemento da diagonal principal daquela linha. O procedimento deve retornar a matriz alterada. */
+
+#include <stdio.h>
+
+// Procedimento que multiplica cada linha pelo elemento da diagonal principal correspondente
+void multiplicarLinhaPorDiagonal(int A[6][6]) {
+    for (int i = 0; i < 6; i++) {
+        // Guarda o elemento da diagonal principal da linha atual antes de alterar a matriz
+        int elementoDiagonal = A[i][i];
+
+        // Multiplica todos os elementos da linha i pelo valor da diagonal principal
+        for (int j = 0; j < 6; j++) {
+            A[i][j] *= elementoDiagonal;
+        }
+    }
+}
+
+// Procedimento auxiliar para exibir a matriz
+void exibirMatriz(int A[6][6]) {
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 6; j++) {
+            printf("%d\t", A[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int A[6][6];
+
+    // Preenchimento de exemplo da matriz 6x6
+    int valor = 1;
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 6; j++) {
+            A[i][j] = valor++;
+        }
+    }
+
+    printf("--- MATRIZ ORIGINAL ---\n");
+    exibirMatriz(A);
+
+    // Chama o procedimento para alterar a matriz
+    multiplicarLinhaPorDiagonal(A);
+
+    printf("\n--- MATRIZ ALTERADA (Linhas multiplicadas pela diagonal principal) ---\n");
+    exibirMatriz(A);
+
+    return 0;
+}
