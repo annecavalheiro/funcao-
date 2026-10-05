@@ -1,0 +1,46 @@
+/* 89. Faça um procedimento que recebe 2 vetores A e B de tamanho 10 de inteiros, por parâmetro. O
+procedimento deve retornar um vetor C, por parâmetro, que contém os elementos de A e B em ordem
+decrescente. */ 
+
+#include <stdio.h>
+
+// Procedimento que junta A e B em C e ordena em ordem decrescente
+void uniaoEOrdenaDecrescente(int A[], int B[], int C[]) {
+    // Processamento parte 1: junta os elementos de A e B no vetor C (tamanho 20)
+    for (int i = 0; i < 10; i++) {
+        C[i] = A[i];
+        C[i + 10] = B[i];
+    }
+
+    // Processamento parte 2: ordena o vetor C em ordem decrescente (Bubble Sort)
+    int aux;
+    for (int i = 0; i < 20; i++) {
+        for (int j = 0; j < 19 - i; j++) {
+            if (C[j] < C[j + 1]) { // Inverte para ordem decrescente
+                aux = C[j];
+                C[j] = C[j + 1];
+                C[j + 1] = aux;
+            }
+        }
+    }
+}
+
+int main() {
+    // Entrada: 2 vetores A e B com 10 elementos inteiros cada
+    int A[10] = {3, 15, 8, 42, 1, 19, 27, 5, 11, 30};
+    int B[10] = {90, 4, 22, 18, 6, 50, 12, 7, 2, 33};
+
+    int C[20]; // Vetor para armazenar os 20 elementos combinados
+
+    // Chama o procedimento enviando A, B e o vetor C para receber o resultado
+    uniaoEOrdenaDecrescente(A, B, C);
+
+    // Saida: exibe os elementos do vetor C em ordem decrescente
+    printf("Vetor C (elementos de A e B em ordem decrescente):\n");
+    for (int i = 0; i < 20; i++) {
+        printf("%d ", C[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
