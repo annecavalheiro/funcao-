@@ -1,0 +1,62 @@
+/* 112. Na teoria dos sistemas, define-se como elemento minimax de uma matriz o menor elemento de uma
+linha onde se encontra o maior elemento da matriz. Faça uma função que recebe, por parâmetro, uma
+matriz A(10,10) e retorna o seu elemento minimax, juntamente com a sua posição. */
+
+#include <stdio.h>
+
+// Funcao que encontra e retorna o elemento minimax da matriz A(10,10)
+// Retorna a linha e a coluna onde ele se encontra por meio de ponteiros (*linMinimax, *colMinimax)
+int encontrarMinimax(int A[10][10], int *linMinimax, int *colMinimax) {
+    // Passo 1: Encontrar o maior elemento da matriz inteira e guardar sua linha
+    int maiorElemento = A[0][0];
+    int linhaDoMaior = 0;
+
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            if (A[i][j] > maiorElemento) {
+                maiorElemento = A[i][j];
+                linhaDoMaior = i;
+            }
+        }
+    }
+
+    // Passo 2: Encontrar o menor elemento na linha onde estava o maior elemento (elemento minimax)
+    int minimax = A[linhaDoMaior][0];
+    *linMinimax = linhaDoMaior;
+    *colMinimax = 0;
+
+    for (int j = 1; j < 10; j++) {
+        if (A[linhaDoMaior][j] < minimax) {
+            minimax = A[linhaDoMaior][j];
+            *colMinimax = j;
+        }
+    }
+
+    return minimax;
+}
+
+int main() {
+    int A[10][10];
+    int lin, col;
+
+    // Preenchimento de exemplo para testes
+    int contador = 1;
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            A[i][j] = contador++;
+        }
+    }
+
+    // Alterando alguns valores específicos para testar a lógica
+    A[3][4] = 500; // Maior elemento da matriz está na linha 3 (índice 3)
+    A[3][7] = -15; // Menor elemento da linha 3 (elemento minimax)
+
+    // Chama a função
+    int valorMinimax = encontrarMinimax(A, &lin, &col);
+
+    // Saída: exibe o valor do minimax e sua posição
+    printf("Elemento Minimax: %d\n", valorMinimax);
+    printf("Posicao: Linha %d, Coluna %d (indices [%d][%d])\n", lin + 1, col + 1, lin, col);
+
+    return 0;
+}
