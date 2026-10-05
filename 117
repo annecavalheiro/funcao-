@@ -1,0 +1,48 @@
+/* 117. Faça uma função que receba, por parâmetro, uma matriz A(8,8) e retorne o menor valor dos
+elementos acima da diagonal secundária. */ 
+
+#include <stdio.h>
+
+// Funcao que recebe a matriz A(8,8) por parametro e retorna 
+// o menor valor entre os elementos acima da diagonal secundaria
+int menorAcimaDiagonalSecundaria(int A[8][8]) {
+    // Os elementos acima da diagonal secundaria sao aqueles onde i + j < 7 (dimensao - 1)
+    
+    // Inicializa o menor com o primeiro elemento valido acima da diagonal (linha 0, coluna 0)
+    int menor = A[0][0];
+
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            if (i + j < 7) {
+                if (A[i][j] < menor) {
+                    menor = A[i][j];
+                }
+            }
+        }
+    }
+
+    return menor;
+}
+
+int main() {
+    int A[8][8];
+
+    // Preenchimento de exemplo para testes
+    int valor = 10;
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            A[i][j] = valor++;
+        }
+    }
+
+    // Alterando um elemento acima da diagonal secundaria para testar a busca pelo menor
+    A[1][2] = -5; 
+
+    // Chama a funcao para encontrar o menor valor
+    int resultado = menorAcimaDiagonalSecundaria(A);
+
+    // Saida: exibe o menor elemento encontrado
+    printf("Menor elemento acima da diagonal secundaria: %d\n", resultado);
+
+    return 0;
+}
