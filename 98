@@ -1,0 +1,37 @@
+/* 98. Uma locadora de vídeos tem guardada, em um vetor A de 500 posições, a quantidade de filmes retirados
+por seus clientes durante o ano de 1997. Agora, esta locadora está fazendo uma promoção e, para cada
+15 filmes retirados, o cliente tem direito a uma locação grátis. Faça um procedimento que receba o vetor
+A por parâmetro e retorna, também por parâmetro, um vetor contendo a quantidade de locações gratuitas
+a que cada cliente tem direito. */ 
+
+#include <stdio.h>
+
+// Procedimento que recebe o vetor A (locacoes) e calcula o vetor de cortesias (gratuitas)
+void calcularLocacoesGratis(int A[], int gratuitas[]) {
+    // Processamento: cada 15 filmes retirados dão direito a 1 locação grátis
+    for (int i = 0; i < 500; i++) {
+        gratuitas[i] = A[i] / 15;
+    }
+}
+
+int main() {
+    // Entrada: vetor A com a quantidade de filmes retirados por 500 clientes
+    int A[500];
+    int gratuitas[500];
+
+    // Exemplo de preenchimento do vetor A para teste
+    for (int i = 0; i < 500; i++) {
+        A[i] = (i + 1) * 3; // Preenche com valores de teste (ex: 3, 6, 9, 12, 15, 18...)
+    }
+
+    // Chama o procedimento enviando A e o vetor gratuitas por parametro
+    calcularLocacoesGratis(A, gratuitas);
+
+    // Saida: exibe a quantidade de locacoes gratuitas de alguns clientes
+    printf("Quantidade de locacoes gratuitas por cliente (exemplo dos primeiros 10):\n");
+    for (int i = 0; i < 10; i++) {
+        printf("Cliente %d: %d filmes retirados -> %d locacoes gratis\n", i + 1, A[i], gratuitas[i]);
+    }
+
+    return 0;
+}
