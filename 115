@@ -1,0 +1,39 @@
+/* 115. Faça uma função que receba, por parâmetro, uma matriz A(10,10)e retorne a soma dos elementos
+acima da diagonal principal. */
+
+#include <stdio.h>
+
+// Funcao que recebe a matriz A(10,10) por parametro e retorne 
+// a soma dos elementos acima da diagonal principal
+int somarAcimaDiagonalPrincipal(int A[10][10]) {
+    int soma = 0;
+
+    // Elementos acima da diagonal principal sao aqueles onde i < j
+    for (int i = 0; i < 10; i++) {
+        for (int j = i + 1; j < 10; j++) {
+            soma += A[i][j];
+        }
+    }
+
+    return soma;
+}
+
+int main() {
+    int A[10][10];
+
+    // Preenchimento de exemplo para testes
+    int valor = 1;
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            A[i][j] = valor++;
+        }
+    }
+
+    // Chama a funcao para calcular a soma
+    int resultado = somarAcimaDiagonalPrincipal(A);
+
+    // Saida: exibe a soma calculada
+    printf("Soma dos elementos acima da diagonal principal: %d\n", resultado);
+
+    return 0;
+}
