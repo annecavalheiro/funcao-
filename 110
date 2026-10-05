@@ -1,0 +1,40 @@
+/* 110. Faça um procedimento que receba, por parâmetro, uma matriz A(12,12) e retorna, também por
+parâmetro, um vetor com a soma de cada uma das linhas de A . */
+
+#include <stdio.h>
+
+// Procedimento que recebe a matriz A(12,12) por parâmetro e calcula
+// a soma de cada uma de suas linhas, retornando no vetor somaLinhas(12)
+void somarLinhasMatriz(int A[12][12], int somaLinhas[12]) {
+    for (int i = 0; i < 12; i++) {
+        int soma = 0;
+        for (int j = 0; j < 12; j++) {
+            soma += A[i][j];
+        }
+        somaLinhas[i] = soma; // Armazena a soma da linha i no vetor
+    }
+}
+
+int main() {
+    int A[12][12];
+    int somaLinhas[12];
+
+    // Preenchimento de exemplo da matriz A (12x12)
+    int contador = 1;
+    for (int i = 0; i < 12; i++) {
+        for (int j = 0; j < 12; j++) {
+            A[i][j] = contador++;
+        }
+    }
+
+    // Chama o procedimento enviando a matriz A e o vetor somaLinhas
+    somarLinhasMatriz(A, somaLinhas);
+
+    // Saída: exibe a soma calculada para cada linha
+    printf("--- Soma de cada linha da matriz A (12x12) ---\n");
+    for (int i = 0; i < 12; i++) {
+        printf("Soma da Linha %d: %d\n", i + 1, somaLinhas[i]);
+    }
+
+    return 0;
+}
