@@ -1,0 +1,162 @@
+/* 92. Escreva uma função para:
+• preencher uma matriz A de ordem 3;
+• ordenar os elementos da matriz A;
+• gerar uma matriz somente com os números pares da matriz A;
+• gerar uma matriz somente com os números múltiplos de 5;
+• criar um menu para acessar os itens anteriores */
+
+#include <stdio.h>
+
+// Procedimento para preencher a matriz 3x3
+void preencherMatriz(int A[3][3]) {
+    printf("\n--- PREENCHER MATRIZ 3x3 ---\n");
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf("Digite o elemento [%d][%d]: ", i, j);
+            scanf("%d", &A[i][j]);
+        }
+    }
+}
+
+// Procedimento para exibir uma matriz 3x3
+void exibirMatriz(int A[3][3]) {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf("%d\t", A[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+// Procedimento para ordenar a matriz A em ordem crescente
+void ordenarMatriz(int A[3][3]) {
+    int temp[9];
+    int k = 0;
+
+    // Passa a matriz para um vetor unidimensional
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            temp[k] = A[i][j];
+            k++;
+        }
+    }
+
+    // Ordena o vetor (Bubble Sort)
+    int aux;
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 8 - i; j++) {
+            if (temp[j] > temp[j + 1]) {
+                aux = temp[j];
+                temp[j] = temp[j + 1];
+                temp[j + 1] = aux;
+            }
+        }
+    }
+
+    // Devolve os valores ordenados para a matriz A
+    k = 0;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            A[i][j] = temp[k];
+            k++;
+        }
+    }
+
+    printf("\nMatriz ordenada com sucesso!\n");
+}
+
+// Procedimento para gerar e mostrar a matriz com apenas os numeros pares
+void gerarMatrizPares(int A[3][3]) {
+    int pares[3][3] = {0}; // Preenche com zero nas posicoes sem par
+
+    // Processamento: copia apenas os valores pares
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (A[i][j] % 2 == 0) {
+                pares[i][j] = A[i][j];
+            }
+        }
+    }
+
+    printf("\n--- MATRIZ SOMENTE COM PARES (0 para impares) ---\n");
+    exibirMatriz(pares);
+}
+
+// Procedimento para gerar e mostrar a matriz com apenas os multiplos de 5
+void gerarMatrizMultiplos5(int A[3][3]) {
+    int mult5[3][3] = {0}; // Preenche com zero nas posicoes que nao sao multiplos de 5
+
+    // Processamento: copia apenas os multiplos de 5
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (A[i][j] % 5 == 0) {
+                mult5[i][j] = A[i][j];
+            }
+        }
+    }
+
+    printf("\n--- MATRIZ MULTIPLOS DE 5 (0 para nao multiplos) ---\n");
+    exibirMatriz(mult5);
+}
+
+int main() {
+    int A[3][3] = {0};
+    int opcao;
+    int preenchida = 0; // Controla se a matriz ja foi digitada
+
+    do {
+        printf("\n========== MENU ==========\n");
+        printf("1. Preencher matriz A\n");
+        printf("2. Ordenar matriz A\n");
+        printf("3. Gerar matriz de numeros pares\n");
+        printf("4. Gerar matriz de multiplos de 5\n");
+        printf("5. Exibir matriz A atual\n");
+        printf("0. Sair\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                preencherMatriz(A);
+                preenchida = 1;
+                break;
+            case 2:
+                if (preenchida) {
+                    ordenarMatriz(A);
+                    exibirMatriz(A);
+                } else {
+                    printf("\nPreencha a matriz primeiro (Opcao 1)!\n");
+                }
+                break;
+            case 3:
+                if (preenchida) {
+                    gerarMatrizPares(A);
+                } else {
+                    printf("\nPreencha a matriz primeiro (Opcao 1)!\n");
+                }
+                break;
+            case 4:
+                if (preenchida) {
+                    gerarMatrizMultiplos5(A);
+                } else {
+                    printf("\nPreencha a matriz primeiro (Opcao 1)!\n");
+                }
+                break;
+            case 5:
+                if (preenchida) {
+                    printf("\n--- MATRIZ A ATUAL ---\n");
+                    exibirMatriz(A);
+                } else {
+                    printf("\nPreencha a matriz primeiro (Opcao 1)!\n");
+                }
+                break;
+            case 0:
+                printf("\nSaindo do programa...\n");
+                break;
+            default:
+                printf("\nOpcao invalida! Tente novamente.\n");
+        }
+    } while (opcao != 0);
+
+    return 0;
+}
