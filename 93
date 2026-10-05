@@ -1,0 +1,39 @@
+/* 93. Faça um procedimento que recebe, por parâmetro, 2 vetores de 20 elementos inteiros e que calcule e
+retorne, também por parâmetro, o vetor soma dos dois primeiros. */
+
+#include <stdio.h>
+
+// Procedimento que recebe os vetores A e B e calcula a soma ponto a ponto em C
+void somarVetores(int A[], int B[], int C[]) {
+    // Processamento: soma cada elemento correspondente dos vetores A e B
+    for (int i = 0; i < 20; i++) {
+        C[i] = A[i] + B[i];
+    }
+}
+
+int main() {
+    // Entrada: 2 vetores de 20 elementos inteiros cada
+    int A[20] = {
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+        11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+    };
+    
+    int B[20] = {
+        20, 19, 18, 17, 16, 15, 14, 13, 12, 11,
+        10, 9, 8, 7, 6, 5, 4, 3, 2, 1
+    };
+
+    int C[20]; // Vetor para guardar a soma dos dois vetores
+
+    // Chama o procedimento enviando A, B e C (que retorna preenchido)
+    somarVetores(A, B, C);
+
+    // Saida: exibe os elementos do vetor resultante da soma
+    printf("Vetor C (Soma de A + B):\n");
+    for (int i = 0; i < 20; i++) {
+        printf("%d ", C[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
