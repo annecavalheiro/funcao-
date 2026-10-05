@@ -1,0 +1,41 @@
+/* 102. Faça uma função que recebe, por parâmetro, uma matriz A(6,6) e retorna o menor elemento da sua
+diagonal secundária. */
+
+#include <stdio.h>
+
+// Funcao que recebe a matriz A(6,6) por parametro e retorna
+// o menor elemento da sua diagonal secundaria
+int menorDiagonalSecundaria(int A[6][6]) {
+    // Inicializa o menor com o primeiro elemento da diagonal secundaria (linha 0, coluna 5)
+    int menor = A[0][5];
+
+    // Percorre a diagonal secundaria: posicoes A[i][5 - i]
+    for (int i = 1; i < 6; i++) {
+        if (A[i][5 - i] < menor) {
+            menor = A[i][5 - i];
+        }
+    }
+
+    return menor;
+}
+
+int main() {
+    int A[6][6];
+
+    // Entrada: o usuario preenche a matriz 6x6
+    printf("Digite os elementos da matriz 6x6:\n");
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 6; j++) {
+            printf("Elemento [%d][%d]: ", i, j);
+            scanf("%d", &A[i][j]);
+        }
+    }
+
+    // Chama a funcao para encontrar o menor elemento da diagonal secundaria
+    int resultado = menorDiagonalSecundaria(A);
+
+    // Saida: exibe o menor valor encontrado
+    printf("\nMenor elemento da diagonal secundaria: %d\n", resultado);
+
+    return 0;
+}
