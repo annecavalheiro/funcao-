@@ -1,0 +1,56 @@
+/* 91. Faça um procedimento que recebe, por parâmetro, 2 vetores de 10 elementos inteiros e que calcule e
+retorne, também por parâmetro, o vetor diferença dos dois primeiros. */ 
+
+#include <stdio.h>
+
+// Função modularizada para verificar se um elemento existe no vetor
+int jaExiste(int vetor[], int tamanho, int valor) {
+    for (int i = 0; i < tamanho; i++) {
+        if (vetor[i] == valor) {
+            return 1; // Retorna 1 se o elemento for encontrado
+        }
+    }
+    return 0; // Retorna 0 se nao encontrar
+}
+
+// Procedimento que calcula a diferenca (A - B) e armazena no vetor C
+// O tamanho de C tambem e retornado por parametro (tamDiferenca)
+void diferencaVetores(int A[], int B[], int C[], int *tamDiferenca) {
+    int k = 0; // Contador de elementos da diferenca
+
+    // Processamento: percorre A e pega apenas os elementos que NAO estao em B
+    for (int i = 0; i < 10; i++) {
+        // Se o elemento de A nao existir no vetor B
+        if (!jaExiste(B, 10, A[i])) {
+            // Verifica se ele ja nao foi adicionado em C (para evitar repeticoes)
+            if (!jaExiste(C, k, A[i])) {
+                C[k] = A[i];
+                k++;
+            }
+        }
+    }
+
+    // Retorna a quantidade de elementos do vetor diferenca por parametro
+    *tamDiferenca = k;
+}
+
+int main() {
+    // Entrada: 2 vetores de 10 elementos inteiros
+    int A[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int B[10] = {5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
+
+    int C[10]; // Vetor para guardar a diferenca A - B (tamanho maximo 10)
+    int qtdDiferenca = 0;
+
+    // Chama o procedimento enviando A, B, o vetor C e a variavel para o tamanho
+    diferencaVetores(A, B, C, &qtdDiferenca);
+
+    // Saida: exibe os elementos do vetor diferenca
+    printf("Vetor Diferenca (A - B):\n");
+    for (int i = 0; i < qtdDiferenca; i++) {
+        printf("%d ", C[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
