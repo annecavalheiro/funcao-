@@ -1,0 +1,61 @@
+/* 104. Faça um procedimento que receba, por parâmetro, duas matrizes A(4,6) e B(6,4) e retorna uma matriz
+C, também por parâmetro, que seja o produto matricial de M por N. */
+
+#include <stdio.h>
+
+// Procedimento que recebe a matriz A(4,6) e a matriz B(6,4)
+// e calcula o produto matricial resultando na matriz C(4,4)
+void multiplicarMatrizes(int A[4][6], int B[6][4], int C[4][4]) {
+    // Processamento: multiplicação de matrizes (linha por coluna)
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            C[i][j] = 0; // Inicializa a posição acumuladora com zero
+            for (int k = 0; k < 6; k++) {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+}
+
+// Procedimento auxiliar para exibir uma matriz
+void exibirMatriz(int lin, int col, int M[lin][col]) {
+    for (int i = 0; i < lin; i++) {
+        for (int j = 0; j < col; j++) {
+            printf("%d\t", M[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int A[4][6];
+    int B[6][4];
+    int C[4][4];
+
+    // Entrada: preenchimento da matriz A (4x6)
+    printf("--- Preenchendo a Matriz A (4x6) ---\n");
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 6; j++) {
+            printf("A[%d][%d]: ", i, j);
+            scanf("%d", &A[i][j]);
+        }
+    }
+
+    // Entrada: preenchimento da matriz B (6x4)
+    printf("\n--- Preenchendo a Matriz B (6x4) ---\n");
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 4; j++) {
+            printf("B[%d][%d]: ", i, j);
+            scanf("%d", &B[i][j]);
+        }
+    }
+
+    // Chama o procedimento para calcular a multiplicação
+    multiplicarMatrizes(A, B, C);
+
+    // Saída: exibe a matriz C resultante (4x4)
+    printf("\n--- Matriz Resultante C (4x4) [A x B] ---\n");
+    exibirMatriz(4, 4, C);
+
+    return 0;
+}
