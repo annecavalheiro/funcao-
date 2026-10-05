@@ -1,0 +1,40 @@
+/* 109. Faça uma função que receba, por parâmetro, uma matriz B(9,9) de reais e retorna a soma dos
+elementos das linhas pares de B. */ 
+
+#include <stdio.h>
+
+// Funcao que recebe a matriz B(9,9) de reais por parametro
+// e retorna a soma dos elementos das linhas pares (indices 0, 2, 4, 6, 8)
+float somarLinhasPares(float B[9][9]) {
+    float soma = 0.0;
+
+    // Incrementa 'i' de 2 em 2 para percorrer apenas as linhas pares (0, 2, 4, 6, 8)
+    for (int i = 0; i < 9; i += 2) {
+        for (int j = 0; j < 9; j++) {
+            soma += B[i][j];
+        }
+    }
+
+    return soma;
+}
+
+int main() {
+    float B[9][9];
+
+    // Entrada: preenchimento da matriz B (9x9)
+    printf("--- Preenchendo a Matriz B (9x9) ---\n");
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            printf("B[%d][%d]: ", i, j);
+            scanf("%f", &B[i][j]);
+        }
+    }
+
+    // Chama a funcao para calcular a soma das linhas pares
+    float resultado = somarLinhasPares(B);
+
+    // Saida: exibe a soma calculada
+    printf("\nSoma dos elementos das linhas pares de B: %.2f\n", resultado);
+
+    return 0;
+}
