@@ -1,0 +1,35 @@
+/* 87. Faça um procedimento que recebe, por parâmetro, um vetor A(25) de inteiros e substitui todos os valores
+negativos de A por zero. O vetor A deve retornar alterado. */
+
+#include <stdio.h>
+
+// Procedimento que recebe o vetor A por parametro e substitui os negativos por zero
+void substituirNegativos(int A[]) {
+    // Processamento: percorre o vetor e altera os valores menores que zero
+    for (int i = 0; i < 25; i++) {
+        if (A[i] < 0) {
+            A[i] = 0;
+        }
+    }
+}
+
+int main() {
+    // Entrada: vetor A com 25 elementos inteiros (com positivos e negativos)
+    int A[25] = {
+        10, -5, 3, -1, 0, -8, 12, -20, 15, -4,
+        7, -9, 2, -6, 11, -3, 18, -14, 5, -2,
+        8, -11, 4, -7, 1
+    };
+
+    // Chama o procedimento para alterar o vetor A
+    substituirNegativos(A);
+
+    // Saida: exibe o vetor A alterado (com zeros nos lugares dos negativos)
+    printf("Vetor A apos substituir os negativos por zero:\n");
+    for (int i = 0; i < 25; i++) {
+        printf("%d ", A[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
