@@ -1,0 +1,48 @@
+/* 88. Faça um procedimento que gera os 10 primeiros primos acima de 100 e retorna-os em um vetor X(10),
+por parâmetro. */
+
+#include <stdio.h>
+
+// Funcao modularizada para verificar se um numero e primo
+int ehPrimo(int n) {
+    if (n <= 1) return 0;
+    
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0) {
+            return 0; // Retorna 0 se encontrar algum divisor (nao e primo)
+        }
+    }
+    return 1; // Retorna 1 se for primo
+}
+
+// Procedimento que gera os 10 primeiros primos acima de 100 e guarda no vetor X
+void gerarPrimosAcimaDe100(int X[]) {
+    int contador = 0;
+    int numero = 101; // Primeiro numero inteiro acima de 100
+
+    // Processamento: busca os numeros primos ate preencher as 10 posicoes
+    while (contador < 10) {
+        if (ehPrimo(numero)) {
+            X[contador] = numero;
+            contador++;
+        }
+        numero++;
+    }
+}
+
+int main() {
+    // Entrada: vetor X para receber os 10 primeiros primos acima de 100
+    int X[10];
+
+    // Chama o procedimento para gerar e preencher os primos
+    gerarPrimosAcimaDe100(X);
+
+    // Saida: exibe os 10 numeros primos gerados
+    printf("Os 10 primeiros numeros primos acima de 100 sao:\n");
+    for (int i = 0; i < 10; i++) {
+        printf("%d ", X[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
