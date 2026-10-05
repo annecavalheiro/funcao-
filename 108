@@ -1,0 +1,75 @@
+/* 108. Faça um procedimento que receba uma matriz A(10,10), por parâmetro, e realize as seguintes trocas:
+• a linha 2 com a linha 8;
+• a coluna 4 com a coluna 10;
+• a diagonal principal com a secundária;
+• a linha 5 com a coluna 10;
+O procedimento deve retornar a matriz alterada. */
+
+#include <stdio.h>
+
+// Procedimento para realizar todas as trocas solicitadas na matriz 10x10
+void realizarTrocas(int A[10][10]) {
+    int aux;
+
+    // 1. Troca a linha 2 (indice 1) com a linha 8 (indice 7)
+    for (int j = 0; j < 10; j++) {
+        aux = A[1][j];
+        A[1][j] = A[7][j];
+        A[7][j] = aux;
+    }
+
+    // 2. Troca a coluna 4 (indice 3) com a coluna 10 (indice 9)
+    for (int i = 0; i < 10; i++) {
+        aux = A[i][3];
+        A[i][3] = A[i][9];
+        A[i][9] = aux;
+    }
+
+    // 3. Troca a diagonal principal com a secundaria
+    // Diagonal Principal: A[i][i] | Diagonal Secundaria: A[i][9 - i]
+    for (int i = 0; i < 10; i++) {
+        aux = A[i][i];
+        A[i][i] = A[i][9 - i];
+        A[i][9 - i] = aux;
+    }
+
+    // 4. Troca a linha 5 (indice 4) com a coluna 10 (indice 9)
+    for (int k = 0; k < 10; k++) {
+        aux = A[4][k];
+        A[4][k] = A[k][9];
+        A[k][9] = aux;
+    }
+}
+
+// Procedimento auxiliar para exibir a matriz
+void exibirMatriz(int A[10][10]) {
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            printf("%d\t", A[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int A[10][10];
+
+    // Preenchimento automatico para testes (valores de 10 a 109)
+    int valor = 10;
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            A[i][j] = valor++;
+        }
+    }
+
+    printf("--- MATRIZ ORIGINAL ---\n");
+    exibirMatriz(A);
+
+    // Chama o procedimento para realizar as trocas
+    realizarTrocas(A);
+
+    printf("\n--- MATRIZ APOS AS TROCAS ---\n");
+    exibirMatriz(A);
+
+    return 0;
+}
