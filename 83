@@ -1,0 +1,39 @@
+/* 83. Faça uma função que recebe um vetor X(15) de inteiros , por parâmetro, e retorna a quantidade de valores
+pares em X. */
+
+#include <stdio.h>
+
+// Funcao modularizada para verificar se um numero e par
+int ehPar(int numero) {
+    if (numero % 2 == 0) {
+        return 1; // Retorna 1 se for par
+    }
+    return 0; // Retorna 0 se for impar
+}
+
+// Funcao que recebe o vetor X de 15 elementos e retorna a quantidade de pares
+int contarPares(int X[]) {
+    int contador = 0;
+
+    // Processamento: percorre o vetor e conta quantos sao pares
+    for (int i = 0; i < 15; i++) {
+        if (ehPar(X[i])) {
+            contador++;
+        }
+    }
+
+    return contador; // Retorna a quantidade total de pares
+}
+
+int main() {
+    // Entrada: vetor X com 15 elementos inteiros
+    int X[15] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+
+    // Chama a funcao para contar os pares
+    int totalPares = contarPares(X);
+
+    // Saida: exibe a quantidade de elementos pares
+    printf("Quantidade de numeros pares no vetor: %d\n", totalPares);
+
+    return 0;
+}
