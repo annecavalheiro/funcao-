@@ -1,0 +1,40 @@
+/* 85. Faça um procedimento que recebe 2 vetores A e B de tamanho 15 de inteiros, por parâmetro. O vetor B
+deve conter o somatório de cada elemento de A. */
+
+#include <stdio.h>
+
+// Funcao modularizada que calcula o somatorio de um numero
+// Somatorio de N = 1 + 2 + 3 + ... + N
+int calcularSomatorio(int n) {
+    int soma = 0;
+    for (int i = 1; i <= n; i++) {
+        soma = soma + i;
+    }
+    return soma;
+}
+
+// Procedimento que recebe os vetores A e B e altera B com o somatorio de cada elemento
+void preencherSomatorio(int A[], int B[]) {
+    // Processamento: calcula o somatorio de cada posicao de A e grava em B
+    for (int i = 0; i < 15; i++) {
+        B[i] = calcularSomatorio(A[i]);
+    }
+}
+
+int main() {
+    // Entrada: vetor A preenchido e vetor B para receber os resultados
+    int A[15] = {4, 1, 0, 5, 3, 2, 6, 0, 8, 3, 7, 10, 2, 4, 9};
+    int B[15];
+
+    // Chama o procedimento para calcular e preencher o vetor B
+    preencherSomatorio(A, B);
+
+    // Saida: exibe os elementos do vetor B alterado
+    printf("Vetor B (somatorio de cada elemento de A):\n");
+    for (int i = 0; i < 15; i++) {
+        printf("%d ", B[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
