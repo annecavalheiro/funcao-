@@ -1,0 +1,49 @@
+/* 118. Faça uma função que receba, por parâmetro, uma matriz A(12,12) e retorna a média aritmética dos
+elementos abaixo da diagonal principal e da diagonal secundária. */ 
+
+#include <stdio.h>
+
+// Funcao que recebe a matriz A(12,12) e retorna a media aritmetica dos
+// elementos que estao simultaneamente abaixo da diagonal principal e da secundaria
+float mediaAbaixoDiagonais(float A[12][12]) {
+    float soma = 0.0;
+    int contador = 0;
+
+    // Condicoes para estar abaixo de ambas as diagonais:
+    // 1. Abaixo da diagonal principal: i > j
+    // 2. Abaixo da diagonal secundaria: i + j > 11 (dimensao - 1)
+    for (int i = 0; i < 12; i++) {
+        for (int j = 0; j < 12; j++) {
+            if (i > j && (i + j) > 11) {
+                soma += A[i][j];
+                contador++;
+            }
+        }
+    }
+
+    if (contador > 0) {
+        return soma / contador;
+    }
+
+    return 0.0;
+}
+
+int main() {
+    float A[12][12];
+
+    // Preenchimento de exemplo para testes
+    float valor = 1.0;
+    for (int i = 0; i < 12; i++) {
+        for (int j = 0; j < 12; j++) {
+            A[i][j] = valor++;
+        }
+    }
+
+    // Chama a funcao para calcular a media
+    float media = mediaAbaixoDiagonais(A);
+
+    // Saida: exibe a media calculada
+    printf("Media dos elementos abaixo das duas diagonais: %.2f\n", media);
+
+    return 0;
+}
