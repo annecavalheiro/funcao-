@@ -1,0 +1,60 @@
+/* 103. Faça um procedimento que recebe, por parâmetro, uma matriz A(8,8) e calcula o maior elemento da
+sua diagonal principal. A seguir, o procedimento deve dividir todos os elementos de A pelo maior
+encontrado. O procedimento deve retornar a matriz alterada. */ 
+
+#include <stdio.h>
+
+// Procedimento que encontra o maior elemento da diagonal principal
+// e divide todos os elementos da matriz A por esse maior valor
+void dividirPeloMaiorDiagonal(float A[8][8]) {
+    // Passo 1: Encontrar o maior elemento da diagonal principal
+    float maior = A[0][0];
+    for (int i = 1; i < 8; i++) {
+        if (A[i][i] > maior) {
+            maior = A[i][i];
+        }
+    }
+
+    // Passo 2: Dividir todos os elementos da matriz pelo maior valor encontrado
+    if (maior != 0) { // Evita divisao por zero
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                A[i][j] /= maior;
+            }
+        }
+    } else {
+        printf("\nAtencao: O maior elemento da diagonal e 0, divisao nao realizada.\n");
+    }
+}
+
+// Procedimento auxiliar para exibir a matriz
+void exibirMatriz(float A[8][8]) {
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            printf("%.2f\t", A[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    float A[8][8];
+
+    // Entrada: o usuario preenche a matriz 8x8
+    printf("Digite os elementos da matriz 8x8:\n");
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            printf("Elemento [%d][%d]: ", i, j);
+            scanf("%f", &A[i][j]);
+        }
+    }
+
+    // Chama o procedimento para alterar a matriz A
+    dividirPeloMaiorDiagonal(A);
+
+    // Saida: exibe a matriz alterada
+    printf("\n--- MATRIZ ALTERADA (Dividida pelo maior elemento da diagonal principal) ---\n");
+    exibirMatriz(A);
+
+    return 0;
+}
