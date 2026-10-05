@@ -1,0 +1,75 @@
+/* 120. As informações de conta corrente de correntistas de um banco são armazenadas em duas
+estruturas de dados. Um vetor e uma matriz que, respectivamente, guaradam as informações de
+números de contas corrente (vetor), os saldos bancários e os limites de cheque especial (matriz). */
+
+#include <stdio.h>
+
+int contas[5];
+float dados[5][2]; // [0] = saldo, [1] = limite
+
+// Procura a conta no vetor e retorna a posicao (ou -1 se nao achar)
+int achar(int conta) {
+    for (int i = 0; i < 5; i++) {
+        if (contas[i] == conta) return i;
+    }
+    return -1;
+}
+
+void cadastrar_contas() {
+    printf("--- Cadastro das 5 contas ---\n");
+    for (int i = 0; i < 5; i++) {
+        printf("Conta %d (num saldo limite): ", i + 1);
+        scanf("%d %f %f", &contas[i], &dados[i][0], &dados[i][1]);
+    }
+}
+
+void relatorio_contas() {
+    printf("\n--- Relatorio ---\n");
+    for (int i = 0; i < 5; i++) {
+        printf("Conta: %d | Saldo: %.2f | Limite: %.2f\n", contas[i], dados[i][0], dados[i][1]);
+    }
+}
+
+float deposito_conta(int conta, float valor) {
+    int pos = achar(conta);
+    if (pos == -1) return -9999;
+    
+    dados[pos][0] += valor;
+    return dados[pos][0];
+}
+
+float debito_conta(int conta, float valor) {
+    int pos = achar(conta);
+    if (pos == -1) return -9999;
+    if (valor > (dados[pos][0] + dados[pos][1])) return -9998;
+
+    dados[pos][0] -= valor;
+    return dados[pos][0];
+}
+
+int main() {
+    int op = 0, c;
+    float v, r;
+
+    cadastrar_contas();
+    relatorio_contas();
+
+    while (op != 3) {
+        printf("\n1-Deposito | 2-Debito | 3-Sair: ");
+        scanf("%d", &op);
+
+        if (op == 1 || op == 2) {
+            printf("Numero da conta e valor: ");
+            scanf("%d %f", &c, &v);
+
+            r = (op == 1) ? deposito_conta(c, v) : debito_conta(c, v);
+
+            if (r == -9999) printf("Conta %d: conta inexistente\n", c);
+            else if (r == -9998) printf("Conta %d: saldo insuficiente\n", c);
+            else printf("Conta %d: Novo Saldo = %.2f\n", c, r);
+        }
+    }
+
+    relatorio_contas();
+    return 0;
+}
