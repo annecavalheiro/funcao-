@@ -1,0 +1,53 @@
+/* 95. Faça um procedimento que receba, por parâmetro, um vetor K(15) e retorna, também por parâmetro, um
+vetor P contendo apenas os valores primos de K. */
+
+#include <stdio.h>
+
+// Funcao modularizada para verificar se um numero e primo
+int ehPrimo(int n) {
+    if (n <= 1) return 0; // Numeros menores ou iguais a 1 nao sao primos
+
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0) {
+            return 0; // Encontrou divisor, nao e primo
+        }
+    }
+    return 1; // E primo
+}
+
+// Procedimento que copia apenas os primos de K para P
+// Retorna tambem a quantidade de primos encontrados por parametro (tamP)
+void extrairPrimos(int K[], int P[], int *tamP) {
+    int posP = 0; // Contador/indice do vetor P
+
+    // Processamento: percorre o vetor K e salva os primos em P
+    for (int i = 0; i < 15; i++) {
+        if (ehPrimo(K[i])) {
+            P[posP] = K[i];
+            posP++;
+        }
+    }
+
+    // Retorna o tamanho do vetor P por parametro
+    *tamP = posP;
+}
+
+int main() {
+    // Entrada: vetor K com 15 elementos inteiros
+    int K[15] = {2, 4, 7, 10, 13, 15, 17, 20, 23, 25, 29, 30, 31, 33, 37};
+
+    int P[15]; // Vetor para guardar os numeros primos
+    int qtdPrimos = 0;
+
+    // Chama o procedimento enviando K, P e a variavel para o tamanho
+    extrairPrimos(K, P, &qtdPrimos);
+
+    // Saida: exibe os elementos primos encontrados no vetor P
+    printf("Vetor P (apenas os numeros primos de K - %d encontrados):\n", qtdPrimos);
+    for (int i = 0; i < qtdPrimos; i++) {
+        printf("%d ", P[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
