@@ -1,0 +1,49 @@
+/* 107. Faça um procedimento que recebe, por parâmetro, uma matriz M(6,6) e um valor A . O procedimento
+deve multiplicar cada elemento de M por A e armazenar em um vetor V(36). O vetor V deve retornar por
+parâmetro. */ 
+
+#include <stdio.h>
+
+// Procedimento que recebe a matriz M(6,6), o escalar A e retorna o vetor V(36)
+void multiplicarMatrizPorEscalar(int M[6][6], int A, int V[36]) {
+    int k = 0; // Indice para percorrer o vetor V
+
+    // Processamento: multiplica cada elemento de M por A e armazena em V
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 6; j++) {
+            V[k] = M[i][j] * A;
+            k++;
+        }
+    }
+}
+
+int main() {
+    int M[6][6];
+    int A;
+    int V[36];
+
+    // Entrada: preenchimento da matriz M(6,6)
+    printf("--- Preenchendo a Matriz M (6x6) ---\n");
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 6; j++) {
+            printf("M[%d][%d]: ", i, j);
+            scanf("%d", &M[i][j]);
+        }
+    }
+
+    // Entrada: valor escalar A
+    printf("\nDigite o valor de A: ");
+    scanf("%d", &A);
+
+    // Chama o procedimento enviando M, A e o vetor V por parametro
+    multiplicarMatrizPorEscalar(M, A, V);
+
+    // Saida: exibe os 36 elementos do vetor V resultante
+    printf("\n--- Vetor Resultante V (36 elementos) ---\n");
+    for (int i = 0; i < 36; i++) {
+        printf("%d ", V[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
