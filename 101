@@ -1,0 +1,46 @@
+/*101. Faça uma função que recebe, por parâmetro, uma matriz A(7,6) e retorna a soma dos elementos da
+linha 5 e da coluna 3. */
+
+#include <stdio.h>
+
+// Funcao que recebe a matriz A(7,6) por parametro e retorna a soma
+// dos elementos da linha 5 (indice 4) e da coluna 3 (indice 2)
+int somarLinha5EColuna3(int A[7][6]) {
+    int soma = 0;
+
+    // Somando todos os elementos da Linha 5 (matriz[4][j])
+    for (int j = 0; j < 6; j++) {
+        soma += A[4][j];
+    }
+
+    // Somando os elementos da Coluna 3 (matriz[i][2]), 
+    // exceto o elemento A[4][2] para nao somar duas vezes o ponto de intersecção
+    for (int i = 0; i < 7; i++) {
+        if (i != 4) { // Pula a linha 5 que ja foi somada no loop anterior
+            soma += A[i][2];
+        }
+    }
+
+    return soma;
+}
+
+int main() {
+    int A[7][6];
+
+    // Entrada: o usuario preenche a matriz 7x6
+    printf("Digite os elementos da matriz 7x6:\n");
+    for (int i = 0; i < 7; i++) {
+        for (int j = 0; j < 6; j++) {
+            printf("Elemento [%d][%d]: ", i, j);
+            scanf("%d", &A[i][j]);
+        }
+    }
+
+    // Chama a funcao para calcular a soma da linha 5 e da coluna 3
+    int resultado = somarLinha5EColuna3(A);
+
+    // Saida: exibe a soma calculada
+    printf("\nSoma dos elementos da linha 5 e da coluna 3: %d\n", resultado);
+
+    return 0;
+}
