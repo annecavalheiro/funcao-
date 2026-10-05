@@ -1,0 +1,56 @@
+/* 90. Faça um procedimento que recebe, por parâmetro, 2 vetores de 10 elementos inteiros e que calcule e
+retorne, também por parâmetro, o vetor intersecção dos dois primeiros. */ 
+
+#include <stdio.h>
+
+// Função modularizada para verificar se um elemento já existe no vetor
+int jaExiste(int vetor[], int tamanho, int valor) {
+    for (int i = 0; i < tamanho; i++) {
+        if (vetor[i] == valor) {
+            return 1; // Retorna 1 se o elemento ja estiver no vetor
+        }
+    }
+    return 0; // Retorna 0 se nao encontrar
+}
+
+// Procedimento que calcula a interseccao dos vetores A e B e armazena em C
+// O tamanho de C tambem e retornado por parametro (tamInterseccao)
+void interseccaoVetores(int A[], int B[], int C[], int *tamInterseccao) {
+    int k = 0; // Contador de elementos da interseccao
+
+    // Processamento: percorre A e verifica se o elemento tambem existe em B
+    for (int i = 0; i < 10; i++) {
+        // Se o elemento de A estiver em B
+        if (jaExiste(B, 10, A[i])) {
+            // Verifica se ele ainda nao foi adicionado em C (para evitar repeticoes)
+            if (!jaExiste(C, k, A[i])) {
+                C[k] = A[i];
+                k++;
+            }
+        }
+    }
+
+    // Retorna a quantidade de elementos da interseccao por parametro
+    *tamInterseccao = k;
+}
+
+int main() {
+    // Entrada: 2 vetores de 10 elementos inteiros
+    int A[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int B[10] = {5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
+
+    int C[10]; // Vetor para guardar a interseccao (tamanho maximo 10)
+    int qtdInterseccao = 0;
+
+    // Chama o procedimento enviando A, B, o vetor C e a variavel para o tamanho
+    interseccaoVetores(A, B, C, &qtdInterseccao);
+
+    // Saida: exibe os elementos do vetor interseccao
+    printf("Vetor Interseccao:\n");
+    for (int i = 0; i < qtdInterseccao; i++) {
+        printf("%d ", C[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
