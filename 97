@@ -1,0 +1,46 @@
+/* 97. Faça um procedimento que receba, por parâmetro um vetor B(50) de reais e calcula o maior valor do
+vetor. A seguir, o procedimento deve dividir todos os elementos de B pelo maior encontrado. O vetor deve
+retornar alterado. */ 
+
+#include <stdio.h>
+
+// Procedimento que encontra o maior elemento e divide todos os itens do vetor B por ele
+void dividirPeloMaior(float B[]) {
+    // Processamento parte 1: encontra o maior valor do vetor
+    float maior = B[0];
+    for (int i = 1; i < 50; i++) {
+        if (B[i] > maior) {
+            maior = B[i];
+        }
+    }
+
+    // Processamento parte 2: divide cada elemento pelo maior encontrado
+    if (maior != 0) { // Evita divisao por zero
+        for (int i = 0; i < 50; i++) {
+            B[i] = B[i] / maior;
+        }
+    }
+}
+
+int main() {
+    // Entrada: vetor B com 50 numeros reais
+    float B[50] = {
+        10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0,
+        5.0, 15.0, 25.0, 35.0, 45.0, 55.0, 65.0, 75.0, 85.0, 95.0,
+        2.0, 4.0, 6.0, 8.0, 12.0, 14.0, 16.0, 18.0, 22.0, 24.0,
+        1.0, 3.0, 7.0, 9.0, 11.0, 13.0, 17.0, 19.0, 21.0, 23.0,
+        50.0, 40.0, 30.0, 20.0, 10.0, 80.0, 70.0, 60.0, 90.0, 10.0
+    };
+
+    // Chama o procedimento para alterar o vetor B
+    dividirPeloMaior(B);
+
+    // Saida: exibe o vetor B alterado apos a divisao
+    printf("Vetor B apos ser dividido pelo maior elemento:\n");
+    for (int i = 0; i < 50; i++) {
+        printf("%.2f ", B[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
