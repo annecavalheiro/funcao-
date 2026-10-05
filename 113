@@ -1,0 +1,43 @@
+/* 113. Faça um procedimento que receba, por parâmetro, uma matriz 61x10. O procedimento deve somar
+individualmente as colunas da matriz e armazenar o resultado na 61a linha da matriz. O procedimento
+deve retornar a matriz alterada.*/
+
+#include <stdio.h>
+
+// Procedimento que soma os elementos de cada coluna (das linhas 0 a 59)
+// e armazena o resultado na 61ª linha (indice 60)
+void somarColunasMatriz(int M[61][10]) {
+    for (int j = 0; j < 10; j++) {
+        int soma = 0;
+        
+        // Soma os valores das primeiras 60 linhas (indices 0 a 59) para a coluna j
+        for (int i = 0; i < 60; i++) {
+            soma += M[i][j];
+        }
+        
+        // Armazena a soma na 61ª linha (indice 60) da coluna j
+        M[60][j] = soma;
+    }
+}
+
+int main() {
+    int M[61][10];
+
+    // Preenchimento de exemplo para as primeiras 60 linhas
+    for (int i = 0; i < 60; i++) {
+        for (int j = 0; j < 10; j++) {
+            M[i][j] = 1; // Atribuindo 1 a todas as posicoes para teste
+        }
+    }
+
+    // Chama o procedimento para calcular a soma das colunas
+    somarColunasMatriz(M);
+
+    // Saida: exibe os resultados armazenados na 61ª linha (indice 60)
+    printf("--- Soma das colunas (armazenadas na 61a linha) ---\n");
+    for (int j = 0; j < 10; j++) {
+        printf("Coluna %d: %d\n", j + 1, M[60][j]);
+    }
+
+    return 0;
+}
