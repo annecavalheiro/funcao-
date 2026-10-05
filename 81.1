@@ -1,0 +1,60 @@
+/* 81. Faça um procedimento que recebe, por parâmetro, 2 vetores de 10 elementos inteiros e que calcule e
+retorne, também por parâmetro, o vetor união dos dois primeiros. */
+
+#include <stdio.h>
+
+// Função modularizada para verificar se um elemento já existe no vetor
+int jaExiste(int vetor[], int tamanho, int valor) {
+    for (int i = 0; i < tamanho; i++) {
+        if (vetor[i] == valor) {
+            return 1; // Retorna 1 se o elemento ja estiver no vetor
+        }
+    }
+    return 0; // Retorna 0 se nao encontrar
+}
+
+// Procedimento que recebe A e B, e calcula o vetor uniao C (passado por parametro)
+// O tamanho de C tambem e retornado por parametro (tamanhoUniao)
+void uniaoVetores(int A[], int B[], int C[], int *tamanhoUniao) {
+    int k = 0; // Contador de elementos do vetor uniao
+
+    // Processamento parte 1: copia os elementos sem repeticao do vetor A para C
+    for (int i = 0; i < 10; i++) {
+        if (!jaExiste(C, k, A[i])) {
+            C[k] = A[i];
+            k++;
+        }
+    }
+
+    // Processamento parte 2: adiciona os elementos do vetor B em C (se nao forem repetidos)
+    for (int i = 0; i < 10; i++) {
+        if (!jaExiste(C, k, B[i])) {
+            C[k] = B[i];
+            k++;
+        }
+    }
+
+    // Retorna a quantidade de elementos adicionados ao vetor uniao por parametro
+    *tamanhoUniao = k;
+}
+
+int main() {
+    // Entrada: 2 vetores de 10 elementos inteiros
+    int A[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int B[10] = {5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
+
+    int C[20]; // Vetor para guardar a uniao (tamanho maximo 20)
+    int qtdUniao = 0;
+
+    // Chama o procedimento enviando A, B, o vetor C e a variavel para o tamanho
+    uniaoVetores(A, B, C, &qtdUniao);
+
+    // Saida: exibe os elementos do vetor uniao
+    printf("Vetor Uniao:\n");
+    for (int i = 0; i < qtdUniao; i++) {
+        printf("%d ", C[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
