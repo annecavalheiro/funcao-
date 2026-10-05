@@ -1,0 +1,51 @@
+/* 96. Faça um procedimento que receba um vetor A(100) de inteiros e retorna esse mesmo vetor compactado,
+ou seja, sem os seus valores nulos(zero) e negativos. * / 
+
+#include <stdio.h>
+
+// Procedimento que remove os zeros e valores negativos do vetor A
+// O novo tamanho do vetor e retornado por parametro (novoTamanho)
+void compactarVetor(int A[], int *novoTamanho) {
+    int k = 0; // Indice para reescrever o vetor apenas com os elementos validos
+
+    // Processamento: mantem apenas os numeros estritamente maiores que zero (positivos)
+    for (int i = 0; i < 100; i++) {
+        if (A[i] > 0) {
+            A[k] = A[i];
+            k++;
+        }
+    }
+
+    // Retorna a nova quantidade de elementos do vetor compactado
+    *novoTamanho = k;
+}
+
+int main() {
+    // Entrada: vetor A com 100 elementos inteiros (com zeros, positivos e negativos)
+    int A[100] = {
+        10, -5, 0, 3, -1, 0, 8, 12, -20, 15,
+        0, -4, 7, -9, 2, 0, -6, 11, -3, 18,
+        -14, 5, 0, -2, 8, -11, 4, -7, 1, 0,
+        13, -8, 22, 0, -15, 6, 19, -30, 25, 0,
+        -2, 14, -10, 9, 0, -1, 17, -18, 20, 3,
+        0, -5, 12, -3, 8, 0, -22, 16, -7, 21,
+        -9, 4, 0, -11, 28, -6, 15, 0, -13, 2,
+        10, -4, 0, 33, -19, 5, -8, 27, 0, -12,
+        1, -3, 14, 0, -16, 9, -2, 23, -5, 11,
+        0, -10, 7, -1, 18, 0, -25, 30, -8, 6
+    };
+
+    int novoTamanho = 0;
+
+    // Chama o procedimento para compactar o vetor A
+    compactarVetor(A, &novoTamanho);
+
+    // Saida: exibe o vetor A compactado
+    printf("Vetor A compactado (apenas positivos - %d elementos):\n", novoTamanho);
+    for (int i = 0; i < novoTamanho; i++) {
+        printf("%d ", A[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
